@@ -36,7 +36,7 @@
     <script src="https://use.fontawesome.com/6eb7a56903.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <script src="../js/uploadImage.js"></script>
+    <script src="../js/profile.js"></script>
   </head>
   <body>
     <nav>
@@ -65,9 +65,14 @@
    	 </section>
 		 <section class="item">
       <h3>Account Info</h3>
-		 	<p>sample@sample.com</p><button>Change Email</button>
-			<p>***********</p><button>Change Password</button>
+		 	<p>sample@sample.com</p>
+      <input id="newEmail" type="text" placeholder="Enter new email address"> <br>
+      <input id="newPassword" type="password" placeholder="Enter new password">
+      <input id="newPassword2" type="password" placeholder="Confirm new password"> <br>
+      <input id="currentPassword" type="password" placeholder="Enter current password"> <br>
+      <button onclick="updateInfo()">Update Info</button>
 		 </section>
+     <p>Update profile picture</p>
      <input id="profileUpload" onchange="uploadProfilePic()" type="file" accept="image/*">
 
   	</section>
