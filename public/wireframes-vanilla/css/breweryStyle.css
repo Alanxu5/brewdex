@@ -62,6 +62,11 @@ article {
   overflow: hidden;
 }
 
+#reviewtextbox {
+    height:100px;
+    width:150px;
+}
+
 /* smartphones, iPhone, portrait 480x320 phones */
 @media (min-width:320px)  {
   .container {

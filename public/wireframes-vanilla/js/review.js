@@ -1,15 +1,19 @@
 function writeReview() {
   var review = $("#review").val();
-  console.log(review);
-  console.log(firebase.database().ref('reviews'));
+  url = window.location.href;
+  currentLocation = url.split('/').pop();
+  currentLocation = currentLocation.split('.')[0];
+  var location;
   uid = firebase.auth().currentUser.uid;
+
   var reviewData = {
     uid: uid,
-    review: review
+    review: review,
+    location: currentLocation
   };
   var newReviewKey = firebase.database().ref("reviews/").child('reviews').push().key;
   var updates = {};
-  updates['/reviews/' + newReviewKey] = reviewData;
+  updates['/' + currentLocation + '/' + newReviewKey] = reviewData;
   updates['/user-reviews/' + uid + '/' + newReviewKey] = reviewData;
   return firebase.database().ref().update(updates);
 }
