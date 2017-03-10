@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Brewdex - Login</title>
+    <link rel="stylesheet" type="text/css" href="../css/loginStyle.css">
+    <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCck0J0h1VN7P5YTGz9CS2BKRJd-z33P8M",
+        authDomain: "b-hw3-3793a.firebaseapp.com",
+        databaseURL: "https://b-hw3-3793a.firebaseio.com",
+        storageBucket: "b-hw3-3793a.appspot.com",
+        messagingSenderId: "541447121792"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script type="text/javascript">
+      // FirebaseUI config.
+      var uiConfig = {
+        signInSuccessUrl: '/wireframes-vanilla/html/home.html',
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+          // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+          // firebase.auth.GithubAuthProvider.PROVIDER_ID,
+          firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        // Terms of service url.
+        tosUrl: '<your-tos-url>'
+      };
+      </script>
+    <script src="../js/authentication.js"></script>
+  </head>
+  <body onload="checkLogin()">
+    <div class="container">
+      <div id="menu">
+        <img src="../images/logo.png" style="display: flex; margin: auto;" alt="BrewDex"/>
+        <a href="#login" class="tab">Login</a>
+        <a href="#register" class="tab">Register</a>
+      </div>
+      <div class="tab-container">
+        <div id="register" class="tab-content">
+          <h2>Register</h2>
+            <h3>Email</h3>
+            <input id="registerEmail" type="text"><br><br>
+            <h3>Password</h3>
+            <input id="registerPassword" type="password">
+            <h3>Confirm Password</h3>
+            <input id="registerPassword2" type="password">
+            <button onclick="registerWithEmail()" class="firebaseui-idp-button mdl-button mdl-js-button mdl-button--raised firebaseui-idp-password firebaseui-id-idp-button "><img class="firebaseui-idp-icon" src="https://www.gstatic.com/firebasejs/ui/0.5.0/images/auth/mail.svg"><span class="firebaseui-idp-text firebaseui-idp-text-long">Register with email</span><span class="firebaseui-idp-text firebaseui-idp-text-short">Email</span></button>
+        </div>
+        <div id="login" class="tab-content">
+          <h2>Login</h2>
+          <h3>Email</h3>
+          <input id="loginEmail" type="text">
+          <h3>Password</h3>
+          <input id= "loginPassword" type="password"><br>
+          <button onclick="signIn()" class="firebaseui-idp-button mdl-button mdl-js-button mdl-button--raised firebaseui-idp-password firebaseui-id-idp-button "><img class="firebaseui-idp-icon" src="https://www.gstatic.com/firebasejs/ui/0.5.0/images/auth/mail.svg"><span class="firebaseui-idp-text firebaseui-idp-text-long">Sign in with email</span><span class="firebaseui-idp-text firebaseui-idp-text-short">Email</span></button>
+          <button onclick="signInWithGoogle()" class="firebaseui-idp-button mdl-button mdl-js-button mdl-button--raised firebaseui-idp-google firebaseui-id-idp-button "><img class="firebaseui-idp-icon" src="https://www.gstatic.com/firebasejs/ui/0.5.0/images/auth/google.svg"><span class="firebaseui-idp-text firebaseui-idp-text-long">Sign in with Google</span><span class="firebaseui-idp-text firebaseui-idp-text-short">Google</span></button>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

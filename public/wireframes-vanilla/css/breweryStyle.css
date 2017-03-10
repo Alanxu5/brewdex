@@ -1,0 +1,78 @@
+ul.navbar {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+li.logout{
+  padding: 5px;
+  font-family: 'Roboto', sans-serif;
+  float: right;
+}
+
+li.navbar{
+  padding: 5px;
+  font-family: 'Roboto', sans-serif;
+  float: left;
+}
+
+a.navbar{
+  display: block;
+  color: #000;
+  text-align: center;
+  padding: 18px 15px;
+  text-decoration: none;
+}
+
+li a:hover {
+    background-color: #555;
+    color: white;
+}
+
+#logo {
+  padding: 15px;
+  background-color: transparent;
+}
+
+
+body {
+  font-family: sans-serif;
+  background: url("https://www.toptal.com/designers/subtlepatterns/patterns/ignasi_pattern_s.png");
+}
+
+.container {
+  width: 65%;
+  background: white;
+  margin: 0 auto;
+  border-color: #ccc;
+  padding: 30px;
+  -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+  margin-bottom: 100px;
+  clear: both;
+  min-height: 60vh;
+}
+
+article {
+  margin-left: 50px;
+  padding: 1em;
+  overflow: hidden;
+}
+
+/* smartphones, iPhone, portrait 480x320 phones */
+@media (min-width:320px)  {
+  .container {
+    width: 90%;
+    height: 90%;
+    background: white;
+    margin: 0 auto;
+    border-color: #ccc;
+    padding: 5px;
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+  }
+}

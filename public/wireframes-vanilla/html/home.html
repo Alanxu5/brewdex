@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Brewdex - Home</title>
+    <script src="https://use.fontawesome.com/6eb7a56903.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/homeStyle.css">
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCck0J0h1VN7P5YTGz9CS2BKRJd-z33P8M",
+        authDomain: "b-hw3-3793a.firebaseapp.com",
+        databaseURL: "https://b-hw3-3793a.firebaseio.com",
+        storageBucket: "b-hw3-3793a.appspot.com",
+        messagingSenderId: "541447121792"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script type="text/javascript">
+      function logout() {
+        firebase.auth().signOut().then(function() {
+          // Sign-out successful.
+          window.location = "/wireframes-vanilla/html/login.html";
+        }, function(error) {
+          alert(error);
+        });
+      }
+      initApp = function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // // User is signed in.
+            // var displayName = user.displayName;
+            // var email = user.email;
+            // var emailVerified = user.emailVerified;
+            // var photoURL = user.photoURL;
+            // var uid = user.uid;
+            // var providerData = user.providerData;
+            // user.getToken().then(function(accessToken) {
+            //   document.getElementById('sign-in-status').textContent = 'Signed in';
+            //   document.getElementById('sign-in').textContent = 'Sign out';
+            //   document.getElementById('account-details').textContent = JSON.stringify({
+            //     displayName: displayName,
+            //     email: email,
+            //     emailVerified: emailVerified,
+            //     photoURL: photoURL,
+            //     uid: uid,
+            //     accessToken: accessToken,
+            //     providerData: providerData
+            //   }, null, '  ');
+            // });
+          } else {
+            // User is signed out.
+            window.location = "/wireframes-vanilla/html/login.html";
+          }
+        }, function(error) {
+          console.log(error);
+        });
+      };
+      window.addEventListener('load', function() {
+        initApp()
+      });
+    </script>
+    <nav>
+      <ul class="navbar">
+        <li class="navbar"><a id="logo" href="/wireframes-vanilla/html/home.html"><img src="../images/logo_small.png" height="50" width="75" alt="logo"></a>
+        <li class="navbar"><a class="navbar" href="/wireframes-vanilla/html/profile.html"><i class="fa fa-user-circle-o" aria-hidden="true"></i> PROFILE</a></li>
+        <li class="navbar"><a class="navbar" href="/wireframes-vanilla/html/buddies.html"><i class="fa fa-users" aria-hidden="true"></i> BEER BUDDIES</a></li>
+        <li class="navbar"><a class="navbar" href="/wireframes-vanilla/html/notifications.html"><i class="fa fa-bell" aria-hidden="true"></i> NOTIFICATIONS</a></li>
+        <li class="logout"><a class="navbar" onclick="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> LOGOUT</a></li>
+      </ul>
+    </nav>
+  </head>
+  <body>
+    <br/>
+    <section class="container">
+        <h4>Breweries</h4>
+        <form>
+          <input type="text">
+          <button>Search</button>
+        </form>
+      <br/>
+      <div id="table">
+      <!-- Table -->
+        <table>
+          <thead>
+            <tr>
+              <th>Brewery</th>
+              <th>Location</th>
+              <th>Visited</th>
+              <th>Favorite</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="brewery.html">Rock Bottom</a></td>
+              <td>La Jolla</td>
+              <td>x</td>
+              <td>o</td>
+            </tr>
+            <tr>
+              <td><a href="brewery.html">Ballast Point</a></td>
+              <td>Mira Mesa</td>
+              <td>x</td>
+              <td>x</td>
+            </tr>
+            <tr>
+              <td><a href="brewery.html">Green Flash</a></td>
+              <td>Mira Mesa</td>
+              <td>x</td>
+              <td>x</td>
+            </tr>
+            <tr>
+              <td><a href="brewery.html">Draft Republic</a></td>
+              <td>Mira Mesa</td>
+              <td>x</td>
+              <td>x</td>
+            </tr>
+            <tr>
+              <td>Ballast Point</td>
+              <td>Mira Mesa</td>
+              <td>x</td>
+              <td>x</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <div id="footer" style="width: 100%;height: 75px;background-color: #f5f5f5;  bottom: 0px; margin-bottom: 5px;">
+       <div class="row">
+         <div style="float: left; padding-left: 5%">
+           <span>
+             AB Inc. <br>
+             Copyright 2017
+           </span>
+         </div>
+         <div style="float: right; padding-right: 5%;">
+           <span>
+            1234 Maret Street, Suite 00<br>
+            San Francisco, CA 94103<br>
+            someemail@email.com<br>
+          </span>
+         </div>
+       </div>
+     </div>
+  </body>
+</html>
