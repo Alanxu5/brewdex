@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Brewdex - Brewery</title>
+    <script src="https://use.fontawesome.com/6eb7a56903.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase-database.js"></script> -->
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCck0J0h1VN7P5YTGz9CS2BKRJd-z33P8M",
+        authDomain: "b-hw3-3793a.firebaseapp.com",
+        databaseURL: "https://b-hw3-3793a.firebaseio.com",
+        storageBucket: "b-hw3-3793a.appspot.com",
+        messagingSenderId: "541447121792"
+      };
+      firebase.initializeApp(config);
+      var database = firebase.database();
+    </script>
+    <link rel="stylesheet" type="text/css" href="../css/breweryStyle.css">
+    <script src="../js/review.js"></script>
+    <nav>
+      <ul class="navbar">
+        <li class="navbar"><a id="logo" href="home.html"><img src="../images/logo_small.png" height="50" width="75" alt="logo"></a>
+        <li class="navbar"><a class="navbar" href="profile.html"><i class="fa fa-user-circle-o" aria-hidden="true"></i> PROFILE</a></li>
+        <li class="navbar"><a class="navbar" href="buddies.html"><i class="fa fa-users" aria-hidden="true"></i> BEER BUDDIES</a></li>
+        <li class="navbar"><a class="navbar" href="notifications.html"><i class="fa fa-bell" aria-hidden="true"></i> NOTIFICATIONS</a></li>
+        <li class="logout"><a class="navbar" href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> LOGOUT</a></li>
+      </ul>
+    </nav>
+  </head>
+  <body>
+    <article>
+      <header>
+     	 <address>
+         Rock Bottom Restaurant &amp; Brewery <br/>
+         8980 Villa La Jolla Dr <br/>
+         La Jolla, CA 92037 <br/>
+         (858) 450-9277
+       </address>
+      </header>
+      <img src="/wireframes-vanilla/images/Brewery.jpg" alt="profile" height="300" width="425">
+      <br/>
+      <form>
+        <p> Leave a review: </p>
+        <input type="text" id="review"><br/>
+        <button onclick="writeReview()">Submit</button>
+      </form>
+      <br/>
+      <button>Add to Favorites</button>
+      <button>Mark as Visited</button>
+      <h3>My Notes</h3><button>Edit</button>
+      <p>This place has a huge variety, and some very tasty stouts.</p>
+    </article>
+      <!-- <div id="footer" style="width: 100%;height: 75px;background-color: #f5f5f5; position: absolute; bottom: 0px;">
+       <div class="row">
+         <div style="float: left; padding-left: 5%">
+           <span>
+             AB Inc. <br>
+             Copyright 2017
+           </span>
+         </div>
+         <div style="float: right; padding-right: 5%;">
+           <span>
+            1234 Maret Street, Suite 00<br>
+            San Francisco, CA 94103<br>
+            someemail@email.com<br>
+          </span>
+         </div>
+       </div>
+     </div> -->
+  </body>
+</html>

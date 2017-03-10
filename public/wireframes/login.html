@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Brewdex - Login</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+    <div class="container" style="padding-top: 30px;">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel">
+          <img src="../images/logo.png" style="display: flex; margin: auto;"/>
+          <ul class="nav nav-pills">
+            <li class="active"><a data-toggle="tab" href="#login">Login</a></li>
+            <li><a data-toggle="tab" href="#register">Register</a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="login" class="tab-pane active">
+              <h2>Login</h2>
+              <form class="form-signin">
+                <form class="form-group">
+                  <label for="loginInput">Username</label>
+                  <input type="text" class="form-control" id="loginInput" placeholder="Username">
+                </form>
+                <form class="form-group">
+                   <label for="passwordInput">Password</label>
+                   <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+                </form>
+                <div class="row">
+                  <div class="col-md-6">
+                    <a class="btn btn-primary" href="/wireframes/home.html">Submit</a>
+                  </div>
+                  <div class="col-md-6">
+                    <a href="/">Forgot your password?</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div id="register" class="tab-pane ">
+              <h2>Register</h2>
+              <form class="form-signin">
+                <form class="form-group">
+                  <label for="username">Username</label>
+                  <input type="text" class="form-control" id="username" placeholder="Username">
+                </form>
+                <form class="form-group">
+                  <label for="password">Password</label>
+                  <input type="text" class="form-control" id="password" placeholder="********">
+                </form>
+                <form class="form-group">
+                  <label for="confirm">Confirm Password</label>
+                  <input type="text" class="form-control" id="confirm" placeholder="********">
+                </form>
+                <form class="form-group">
+                  <label for="fullname">Name</label>
+                  <input type="text" class="form-control" id="fullname" placeholder="First name Last name">
+                </form>
+                <form class="form-group">
+                   <label for="email">Email</label>
+                   <input type="password" class="form-control" id="email" placeholder="email@example.com">
+                </form>
+                <a class="btn btn-primary" href="/wireframes/home.html">Submit</a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
