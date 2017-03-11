@@ -51,45 +51,14 @@
         <button onclick="writeReview()">Submit</button>
       </form>
 
-      <form>
-        <p>Choose the review you want to delete: </p>
-        <select id="deleteTable">
-          <option></option>
-        </select>
-        <button onclick="deleteReview()">Delete</button>
+      <p>Choose the review you want to delete: </p>
+      <select id="dropdown">
         <template id="deleteRow">
-          <option class="deleteRecord"></option>
+          <option></option>
         </template>
-      </form>
+      </select>
+      <input type="Submit" onclick="deleteReview()"/>
       <br/>
-      <!--Delete Reviews-->
-      <!-- <script type ="text/javascript">
-        window.onload = function(){
-          var t = document.querySelector('#deleteRow'),
-          option = t.content.querySelectorAll("option");
-
-          var ref = firebase.database().ref('BallastPoint');
-          ref.on('value', function(snapshot) {
-            var reviewArr = [];
-            var userArr = [];
-            var data = snapshot.val();
-            for (var key in data) {
-              if (data.hasOwnProperty(key)) {
-                reviewArr.push(data[key].review);
-                userArr.push(data[key].uid);
-              };
-            }
-            var i;
-            for(i = 0; i < reviewArr.length; i++){
-              option.textContent = reviewArr[i];
-              var tb = document.querySelector("option");
-              var clone = document.importNode(t.content, true);
-              tb.appendChild(clone);
-            }
-          });
-        }
-      </script> -->
-
       <p id="reviews"></p>
       <table id="reviewTable">
         <thead>
@@ -132,6 +101,29 @@
               var tb = document.querySelector("tbody");
               var clone = document.importNode(t.content, true);
               tb.appendChild(clone);
+            }
+          });
+          // <!--Delete Reviews-->
+          var template = document.querySelector('#deleteRow'); // obj ref to template
+
+          var ref = firebase.database().ref('BallastPoint');
+          ref.on('value', function(snapshot) {
+            var reviewArr = [];
+            var reviewIDArr = [];
+            var data = snapshot.val();
+            for (var key in data) {
+              if (data.hasOwnProperty(key)) {
+                reviewArr.push(data[key].review);
+                reviewIDArr.push(key);
+              };
+            }
+            var i;
+            for(i = 0; i < reviewArr.length; i++){
+              var clone = template.content.cloneNode(true);
+              var option = clone.querySelectorAll('option');
+              option[0].id += reviewIDArr[i];
+              option[0].innerHTML = reviewArr[i];
+              template.parentNode.appendChild(clone);
             }
           });
         }

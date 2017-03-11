@@ -23,12 +23,16 @@ function updateReview() {
 }
 
 function deleteReview() {
-  var reviewVal = $("#delete").val();
+  console.log($("#dropdown option:selected").text());
+  var reviewID = $("#dropdown option:selected").attr('id');
   uid = firebase.auth().currentUser.uid;
-  var ref = firebase.database().ref('reviews');
-  console.log(reviewVal);
-  ref.on('value', function(snapshot) {
-    var data = snapshot.val();
-    console.log(data);
-  });
+  var ref = firebase.database().ref("BallastPoint/").child(reviewID);
+  var ref1 =  firebase.database().ref("user-reviews/").child(uid).child(reviewID);
+  ref.remove();
+  ref1.remove();
+  location.reload();
+//   var ref = firebase.database().ref('reviews');
+//   ref.on('value', function(snapshot) {
+//     var data = snapshot.val();
+//   });
 }
