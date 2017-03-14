@@ -104,16 +104,19 @@
               tb.appendChild(clone);
             }
           });
-          // <!--Delete Reviews-->
+          // <!--Delete/Update Reviews-->
           var template = document.querySelector('#deleteRow'); // obj ref to template
-
+          var currUid = firebase.auth().currentUser; // need the specific user to display their reviews
+          if (currUid) {
+            currUid = currUid.uid
+          } 
           var ref = firebase.database().ref('BallastPoint');
           ref.on('value', function(snapshot) {
             var reviewArr = [];
             var reviewIDArr = [];
             var data = snapshot.val();
             for (var key in data) {
-              if (data.hasOwnProperty(key)) {
+              if (data.hasOwnProperty(key) && data[key].uid == currUid) {
                 reviewArr.push(data[key].review);
                 reviewIDArr.push(key);
               };
