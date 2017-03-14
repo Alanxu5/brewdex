@@ -51,13 +51,14 @@
         <button onclick="writeReview()">Submit</button>
       </form>
 
-      <p>Choose the review you want to delete: </p>
+      <p>Choose the review you want to delete or update: </p>
       <select id="dropdown">
         <template id="deleteRow">
           <option></option>
         </template>
       </select>
-      <input type="Submit" onclick="deleteReview()"/>
+      <input type="button" value="Delete" onclick="deleteReview()"/>
+      <input type="button" value="Update" onclick="updateReview()"/>
       <br/>
       <p id="reviews"></p>
       <table id="reviewTable">
