@@ -124,10 +124,13 @@ function updateName() {
   if(text.length > 0) {
     user = firebase.auth().currentUser
     user.updateProfile({
-        displayName: text 
+        displayName: text
     }).then(function() {
         alert("Username sucessfully changed to: " + user.displayName);
         $("#name").html(user.displayName);
+        firebase.database().ref('displayName/').child(user.uid).set({
+          displayName: user.displayName
+        });
     }, function(error) {
       alert(error.message)
     });
@@ -175,7 +178,13 @@ function updateInfo() {
           alert(error);
         });
       }
-    }).then(function() { if(email.length > 0) { firebase.auth().currentUser.updateEmail(email); alert("Changed Email!"); } })
+    }).then(function() {
+      if(email.length > 0) {
+        firebase.auth().currentUser.updateEmail(email);
+        alert("Changed Email!");
+        $("email").text(user.email);
+      }
+    })
     .catch(function(error) {
       console.log(error);
       alert(error);
