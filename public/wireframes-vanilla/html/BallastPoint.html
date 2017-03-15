@@ -126,44 +126,34 @@
            }
          });
          // <!--Delete/Update Reviews-->
-         var currUid = new Promise(function(resolve, reject) {
-           var user = firebase.auth().currentUser; // need the specific user to display their reviews
+         firebase.auth().onAuthStateChanged(function(user) {
            if(user){
-             resolve('Success');
-           }
-           else {
-             reject('Fail');
+             var user = firebase.auth().currentUser; // need the specific user to display their reviews
+             var template = document.querySelector('#deleteRow'); // obj ref to template
+             var ref = firebase.database().ref('BallastPoint');
+             ref.on('value', function(snapshot) {
+               var reviewArr = [];
+               var reviewIDArr = [];
+               var data = snapshot.val();
+               for (var key in data) {
+                 if (data.hasOwnProperty(key) && data[key].uid == user.uid) {
+                   reviewArr.push(data[key].review);
+                   reviewIDArr.push(key);
+                 };
+               }
+               var i;
+               for(i = 0; i < reviewArr.length; i++){
+                 var clone = template.content.cloneNode(true);
+                 var option = clone.querySelectorAll('option');
+                 option[0].id += reviewIDArr[i];
+                 option[0].innerHTML = reviewArr[i];
+                 template.parentNode.appendChild(clone);
+               }
+             })
+           } else {
+             console.log("ERRROR");
            }
          });
-         currUid.then(function() {
-           var template = document.querySelector('#deleteRow'); // obj ref to template
-           if (user) {
-             user = currUid.uid;
-             console.log("curr id is set");
-           }
-           var ref = firebase.database().ref('BallastPoint');
-           ref.on('value', function(snapshot) {
-             var reviewArr = [];
-             var reviewIDArr = [];
-             var data = snapshot.val();
-             for (var key in data) {
-               if (data.hasOwnProperty(key) && data[key].uid == currUid) {
-                 reviewArr.push(data[key].review);
-                 reviewIDArr.push(key);
-               };
-             }
-             var i;
-             for(i = 0; i < reviewArr.length; i++){
-               var clone = template.content.cloneNode(true);
-               var option = clone.querySelectorAll('option');
-               option[0].id += reviewIDArr[i];
-               option[0].innerHTML = reviewArr[i];
-               template.parentNode.appendChild(clone);
-             }
-           })
-         }).catch(function(){
-           console.log("user error");
-         })
        }
      </script>
   </body>
