@@ -23,6 +23,8 @@
     </script>
     <link rel="stylesheet" type="text/css" href="../css/breweryStyle.css">
     <script src="../js/review.js"></script>
+  </head>
+  <body>
     <nav>
       <ul class="navbar">
         <li class="navbar"><a id="logo" href="home.html"><img src="../images/logo_small.png" height="50" width="75" alt="logo"></a>
@@ -32,8 +34,6 @@
         <li class="logout"><a class="navbar" href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> LOGOUT</a></li>
       </ul>
     </nav>
-  </head>
-  <body>
     <article class="container">
       <header>
      	 <address>
@@ -45,94 +45,41 @@
       </header>
       <img src="/wireframes-vanilla/images/Brewery.jpg" alt="profile" height="300" width="425">
       <br/>
-      <form>
-        <p> Leave a review: </p>
-        <input type="text" id="review"><br/>
-        <button onclick="writeReview()">Submit</button>
-      </form>
-
-      <p>Choose the review you want to delete or update: </p>
-      <select id="dropdown">
-        <template id="deleteRow">
-          <option></option>
-        </template>
-      </select>
-      <input type="button" value="Delete" onclick="deleteReview()"/>
-      <input type="button" value="Update" onclick="updateReview()"/>
-      <br/>
-      <p id="reviews"></p>
-      <table id="reviewTable">
-        <thead>
+      <div id="ReviewArea">
+        <form>
+          <p> Leave a review: </p>
+          <input type="text" id="review"><br/>
+          <button id="btn" onclick="writeReview()">Submit</button>
+        </form>
+        <p>Choose the review you want to delete or update: </p>
+        <select id="dropdown">
+          <template id="deleteRow">
+            <option></option>
+          </template>
+        </select>
+        <input  id="btn" type="button" value="Delete" onclick="deleteReview()"/>
+        <input  id="btn" type="button" value="Update" onclick="updateReview()"/>
+        <br/>
+        <p id="reviews"></p>
+        <table id="reviewTable">
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Reviews</td>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- existing data could optionally be included here -->
+          </tbody>
+        </table>
+        <template id="reviewRow">
           <tr>
-            <td>Name</td>
-            <td>Reviews</td>
+            <td class="record"></td>
+            <td></td>
           </tr>
-        </thead>
-        <tbody>
-          <!-- existing data could optionally be included here -->
-        </tbody>
-      </table>
-      <template id="reviewRow">
-        <tr>
-          <td class="record"></td>
-          <td></td>
-        </tr>
-      </template>
+        </template>
+      </div>
       <!--Reviews-->
-      <script type ="text/javascript">
-        window.onload = function(){
-          var t = document.querySelector('#reviewRow'),
-          td = t.content.querySelectorAll("td");
-
-          var ref = firebase.database().ref('BallastPoint');
-          ref.on('value', function(snapshot) {
-            var reviewArr = [];
-            var userArr = [];
-            var data = snapshot.val();
-            for (var key in data) {
-              if (data.hasOwnProperty(key)) {
-                reviewArr.push(data[key].review);
-                userArr.push(data[key].uid);
-              };
-            }
-            var i;
-            for(i = 0; i < reviewArr.length; i++){
-              td[0].textContent = userArr[i];
-              td[1].textContent = reviewArr[i];
-              var tb = document.querySelector("tbody");
-              var clone = document.importNode(t.content, true);
-              tb.appendChild(clone);
-            }
-          });
-          // <!--Delete/Update Reviews-->
-          var template = document.querySelector('#deleteRow'); // obj ref to template
-          var currUid = firebase.auth().currentUser; // need the specific user to display their reviews
-          if (currUid) {
-            currUid = currUid.uid
-          } 
-          var ref = firebase.database().ref('BallastPoint');
-          ref.on('value', function(snapshot) {
-            var reviewArr = [];
-            var reviewIDArr = [];
-            var data = snapshot.val();
-            for (var key in data) {
-              if (data.hasOwnProperty(key) && data[key].uid == currUid) {
-                reviewArr.push(data[key].review);
-                reviewIDArr.push(key);
-              };
-            }
-            var i;
-            for(i = 0; i < reviewArr.length; i++){
-              var clone = template.content.cloneNode(true);
-              var option = clone.querySelectorAll('option');
-              option[0].id += reviewIDArr[i];
-              option[0].innerHTML = reviewArr[i];
-              template.parentNode.appendChild(clone);
-            }
-          });
-        }
-      </script>
-
     </article>
     <div id="footer" style="width: 100%;height: 75px;background-color: #f5f5f5;  bottom: 0px; margin-bottom: 5px;">
        <div class="row">
@@ -151,5 +98,63 @@
          </div>
        </div>
      </div>
+     <script>
+       document.getElementById("btn").addEventListener("click", displayReview);
+     </script>
+     <script type ="text/javascript">
+       window.onload = function() {
+         var t = document.querySelector('#reviewRow'),
+         td = t.content.querySelectorAll("td");
+         var ref = firebase.database().ref('BallastPoint');
+         ref.on('value', function(snapshot) {
+           var reviewArr = [];
+           var userArr = [];
+           var data = snapshot.val();
+           for (var key in data) {
+             if (data.hasOwnProperty(key)) {
+               reviewArr.push(data[key].review);
+               userArr.push(data[key].uid);
+             };
+           }
+           var i;
+           for(i = 0; i < reviewArr.length; i++){
+             td[0].textContent = userArr[i];
+             td[1].textContent = reviewArr[i];
+             var tb = document.querySelector("tbody");
+             var clone = document.importNode(t.content, true);
+             tb.appendChild(clone);
+           }
+         });
+         // <!--Delete/Update Reviews-->
+         firebase.auth().onAuthStateChanged(function(user) {
+           if(user){
+             var user = firebase.auth().currentUser; // need the specific user to display their reviews
+             var template = document.querySelector('#deleteRow'); // obj ref to template
+             var ref = firebase.database().ref('BallastPoint');
+             ref.on('value', function(snapshot) {
+               var reviewArr = [];
+               var reviewIDArr = [];
+               var data = snapshot.val();
+               for (var key in data) {
+                 if (data.hasOwnProperty(key) && data[key].uid == user.uid) {
+                   reviewArr.push(data[key].review);
+                   reviewIDArr.push(key);
+                 };
+               }
+               var i;
+               for(i = 0; i < reviewArr.length; i++){
+                 var clone = template.content.cloneNode(true);
+                 var option = clone.querySelectorAll('option');
+                 option[0].id += reviewIDArr[i];
+                 option[0].innerHTML = reviewArr[i];
+                 template.parentNode.appendChild(clone);
+               }
+             })
+           } else {
+             console.log("ERRROR");
+           }
+         });
+       }
+     </script>
   </body>
 </html>
