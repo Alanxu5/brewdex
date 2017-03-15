@@ -7,6 +7,7 @@
     <script src="https://use.fontawesome.com/6eb7a56903.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
     <link rel="stylesheet" type="text/css" href="../css/homeStyle.css">
@@ -33,26 +34,19 @@
       initApp = function() {
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
-            // // User is signed in.
-            // var displayName = user.displayName;
-            // var email = user.email;
-            // var emailVerified = user.emailVerified;
-            // var photoURL = user.photoURL;
-            // var uid = user.uid;
-            // var providerData = user.providerData;
-            // user.getToken().then(function(accessToken) {
-            //   document.getElementById('sign-in-status').textContent = 'Signed in';
-            //   document.getElementById('sign-in').textContent = 'Sign out';
-            //   document.getElementById('account-details').textContent = JSON.stringify({
-            //     displayName: displayName,
-            //     email: email,
-            //     emailVerified: emailVerified,
-            //     photoURL: photoURL,
-            //     uid: uid,
-            //     accessToken: accessToken,
-            //     providerData: providerData
-            //   }, null, '  ');
-            // });
+            if(user.displayName == null) {
+              name = user.email.split("@");
+              user.updateProfile({
+                  displayName: name[0]
+              }).then(function() {
+                  alert(user.displayName);
+                  // Update successful.
+              }, function(error) {
+                  // An error happened.
+              });
+            } else {
+              console.log(user.displayName);
+            }
           } else {
             // User is signed out.
             window.location = "/wireframes-vanilla/html/login.html";

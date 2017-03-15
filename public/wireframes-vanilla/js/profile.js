@@ -45,7 +45,7 @@ function downloadProfilePic() {
 
 function updateBio(){
   var uid = firebase.auth().currentUser.uid;
-  text = $("#bioInput").val();
+  text = $("#bioText").val();
   if(text.length < 1) {
     alert("Enter a bio first");
     return;
@@ -65,7 +65,7 @@ function readBio() {
     if(snapshot.val()) {
       displayBio(snapshot.val().bio);
     } else {
-      displayBio("Add a bio!");
+      displayBio("Add a bio here!");
     }
   });
 }
@@ -76,6 +76,7 @@ function deleteBio() {
   userRef.remove()
   .then(function() {
     displayBio("Add a bio!");
+    alert("Successfully updated bio!")
     console.log("Remove succeeded.");
   })
   .catch(function(error) {
@@ -85,7 +86,7 @@ function deleteBio() {
 
 function displayBio(text) {
   console.log(text);
-  $("#bioText").text(text);
+  $("#bioText").val(text);
 }
 
 function getCredentials(password) {

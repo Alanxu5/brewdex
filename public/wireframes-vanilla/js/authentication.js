@@ -11,16 +11,18 @@ function checkLogin() {
 function registerWithEmail() {
   var email = $("#registerEmail").val();
   var password = $("#registerPassword").val();
-  var password2= $("#registerPassword2").val();
+  var password2 = $("#registerPassword2").val();
+  var firstname = $("#registerFirstName").val();
+  var lastname = $("#registerLastName").val();
 
-  if(!validateRegistrationFields(password, password2, email)) {
+  if(!validateRegistrationFields(password, password2, email, firstname, lastname)) {
     return;
   }
 
   console.log(password + password2 + email)
   var success = true;
   firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
-    window.location = "/wireframes-vanilla/html/home.html";
+    window.location = "/wireframes-vanilla/html/home.html?" + firstname + " " + lastname;
   }, function(error) {
     // Handle Errors here.
     var errorCode = error.code;
@@ -35,16 +37,25 @@ function registerWithEmail() {
 }
 
 /* VALIDATION */
-function validateRegistrationFields(password, password2, email) {
+function validateRegistrationFields(password, password2, email, first, last) {
   var errors = ""
   errors += validatePassword(password, password2);
   errors += validateEmail(password, password2);
+  errors += validateName(first, last);
 
   if(errors != "") {
     alert(errors);
     return false;
   }
   return true;
+}
+
+function validateName(first, last) {
+  if(first < 1 || last < 1) {
+    return "Password must be greater than 5 characters\n";
+  }
+  return "";
+
 }
 
 function validatePassword(password, password2) {
@@ -58,6 +69,7 @@ function validatePassword(password, password2) {
   }
   return "";
 }
+
 function validateEmail(email) {
   var re = /\S+@\S+/
   //re.test(email)
