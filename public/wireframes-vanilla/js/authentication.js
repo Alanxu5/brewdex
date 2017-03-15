@@ -1,7 +1,8 @@
+var locked = false;
 
 function checkLogin() {
   firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
+    if (user & locked == false) {
       window.location = "/wireframes-vanilla/html/home.html";
     }
   });
@@ -21,10 +22,21 @@ function registerWithEmail() {
 
   console.log(password + password2 + email)
   var success = true;
+  locked = true;
   firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
-    window.location = "/wireframes-vanilla/html/home.html?" + firstname + " " + lastname;
+    user.updateProfile({
+        displayName: firstname + " " + lastname
+    }).then(function() {
+        locked = false
+        window.location = "/wireframes-vanilla/html/home.html";
+        console.log(user.displayName);
+        // Update successful.
+    }, function(error) {
+        // An error happened.
+    });
   }, function(error) {
     // Handle Errors here.
+
     var errorCode = error.code;
     var errorMessage = error.message;
 

@@ -119,6 +119,23 @@ function validateEmail(email) {
   }
 }
 
+function updateName() {
+  var text = prompt("Enter a new name", "ex: John Doe");
+  if(text.length > 0) {
+    user = firebase.auth().currentUser
+    user.updateProfile({
+        displayName: text 
+    }).then(function() {
+        alert("Username sucessfully changed to: " + user.displayName);
+        $("#name").html(user.displayName);
+    }, function(error) {
+      alert(error.message)
+    });
+  } else {
+    alert("User name not changed");
+  }
+}
+
 function updateInfo() {
   const password = $("#newPassword").val();
   const password2 = $("#newPassword2").val();

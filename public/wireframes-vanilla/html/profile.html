@@ -19,6 +19,7 @@
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
             var a = readBio();
+            $("#name").html(user.displayName);
             downloadProfilePic();
             console.log(a);
           } else {
@@ -57,7 +58,8 @@
              <tr>
                <td> <img id="profilePic" src="/wireframes-vanilla/images/profile_placeholder.png" alt="profile" style="width: 200px; height: 200px; border-radius: 300px;"> </td>
                <td style="width: 70%;">
-                 <h3 id="name">John Doe</h3>
+                 <span style="font-size: 1.17em; font-weight: bold;" id="name">John Doe</span>
+                 <i class="fa fa-pencil-square-o" aria-hidden="true" onclick="updateName()" style="float: ;">Update</i> <br />
          	       <h3 style="display: inline;">Bio</h3>
                  <i class="fa fa-pencil-square-o" aria-hidden="true" onclick="updateBio()" style="text-align: right;">Update</i>
                  <i class="fa fa-trash-o" aria-hidden="true" onclick="deleteBio()" style="text-align: right;">Delete</i>
