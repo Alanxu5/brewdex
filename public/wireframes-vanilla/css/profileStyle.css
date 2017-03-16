@@ -1,5 +1,67 @@
+/* smartphones, iPhone, portrait 480x320 phones */
+@media (max-width:800px)  {
+  #info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .bioHeader {
+    margin-left: 5px;
+    float: left;
+  }
+  .container {
+    width: 90%;
+    background: white;
+    margin: 0 auto;
+    border-color: #ccc;
+    padding: 5px;
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    min-height: 60vh;
+  }
+  .navbar {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .fa {
+    font-size: 20px !important;
+  }
+}
+
+#infoChangeContainer {
+  display: flex;
+}
+
+@media (max-width:360px) {
+  #logo {
+    width: 0px;
+    height: 0px;
+    visibility: hidden;
+  }
+}
+.navbar {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+#info {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#name {
+  font-size: 4em;
+}
+
 .fa:hover {
     color: darkred;
+    cursor: pointer;
 }
 
 ul.navbar {
@@ -22,7 +84,7 @@ li.navbar{
   float: left;
 }
 
-a.navbar{
+a.navbar {
   display: block;
   color: #000;
   text-align: center;
@@ -46,6 +108,55 @@ img.profile {
   height: 60px;
 }
 
+#profilePic {
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+}
+.imageText {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: grey;
+  color: #fff;
+  padding: 70px;
+  visibility: hidden;
+  border-radius: 100px;
+  opacity: 0;
+  -webkit-transition: visibility opacity 0.2s;
+}
+
+#profileUpload {
+  z-index: 5;
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+}
+
+#profileUpload:hover {
+  cursor: pointer;
+}
+
+.imageWrapper:hover .imageText {
+  visibility: visible;
+  opacity: 0.75;
+  cursor: pointer;
+}
+.imageWrapper {
+  border-radius: 100px;
+  position: relative;
+  height: 200px;
+  width: 200px;
+}
+
 button {
   background-color: #008CBA;
   border-radius: 4px;
@@ -65,20 +176,22 @@ table {
 tr:hover {
   background-color: #f5f5f5;
 }
-
-.container {
-  width: 45%;
-  background: white;
-  margin: 0 auto;
-  border-color: #ccc;
-  padding: 30px;
-  -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
-  -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
-  box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
-  margin-bottom: 100px;
-  clear: both;
-  min-height: 60vh;
+@media (min-width: 800px) {
+  .container {
+    width: 60%;
+    background: white;
+    margin: 0 auto;
+    border-color: #ccc;
+    padding: 30px;
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    margin-bottom: 100px;
+    clear: both;
+    min-height: 60vh;
+  }
 }
+
 
 body {
   font-family: sans-serif;
@@ -125,20 +238,7 @@ button:hover {
   padding-left: 10px;
   padding-bottom: 10px;
 }
-/* smartphones, iPhone, portrait 480x320 phones */
-@media (max-width:320px)  {
-  .container {
-    width: 90%;
-    height: 90%;
-    background: white;
-    margin: 0 auto;
-    border-color: #ccc;
-    padding: 5px;
-    -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
-    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
-  }
-}
+
 
 #bioText {
     width: 100%;
@@ -149,4 +249,22 @@ button:hover {
     border-radius: 4px;
     background-color: #f8f8f8;
     resize: none;
+}
+
+#footer {
+  margin-top: 10vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 0.75em;
+  width: 100%;
+  height: 75px;
+  background-color: #f5f5f5;
+  position: static;
+  bottom: 0px;
+}
+
+.footer-icons > *.fa {
+  font-size: 2em;
 }

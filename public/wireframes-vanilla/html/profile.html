@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Brewdex - Profile</title>
     <link rel="stylesheet" type="text/css" href="../css/profileStyle.css">
     <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
@@ -32,6 +33,11 @@
         });
       };
       window.addEventListener('load', function() {
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+           $(".navText").each(function() {
+            this.innerHTML= "";
+           });
+        }
         initApp();
       });
     </script>
@@ -43,11 +49,11 @@
   <body>
     <nav>
       <ul class="navbar">
-        <li class="navbar"><a id="logo" href="/wireframes-vanilla/html/home.html"><img src="../images/logo_small.png" height="50" width="75" alt="logo"></a>
-        <li class="navbar"><a class="navbar" href="/wireframes-vanilla/html/profile.html"><i class="fa fa-user-circle-o" aria-hidden="true"></i> PROFILE</a></li>
-        <li class="navbar"><a class="navbar" href="/wireframes-vanilla/html/buddies.html"><i class="fa fa-users" aria-hidden="true"></i> BEER BUDDIES</a></li>
-        <li class="navbar"><a class="navbar" href="/wireframes-vanilla/html/notifications.html"><i class="fa fa-bell" aria-hidden="true"></i> NOTIFICATIONS</a></li>
-        <li class="logout"><a class="navbar" href="/wireframes-vanilla/html/login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> LOGOUT</a></li>
+        <li class="navbar" id="logo"><a  href="/wireframes-vanilla/html/home.html"><img src="../images/logo_small.png" height="50" width="75" alt="logo"></a>
+        <li class="navbar"><a class="navbar" href="/wireframes-vanilla/html/profile.html"><i class="fa fa-user-circle-o " aria-hidden="true"></i> <span class="navText">PROFILE</span></a></li>
+        <li class="navbar"><a class="navbar" href="/wireframes-vanilla/html/buddies.html"><i class="fa fa-users " aria-hidden="true"></i> <span class="navText">BEER BUDDIES</span></a></li>
+        <li class="navbar"><a class="navbar" href="/wireframes-vanilla/html/notifications.html"><i class="fa fa-bell " aria-hidden="true"></i><span class="navText">NOTIFICATIONS</span></a></li>
+        <li class="logout"><a class="navbar" href="/wireframes-vanilla/html/login.html"><i class="fa fa-sign-out " aria-hidden="true"></i><span class="navText">LOGOUT</span></a></li>
       </ul>
     </nav>
     <br/>
@@ -55,51 +61,61 @@
      	 <div class="item">
          <div style="text-align: center;">
        	   <h1>Profile</h1>
-           <table>
-             <tr>
-               <td> <img id="profilePic" src="/wireframes-vanilla/images/profile_placeholder.png" alt="profile" style="width: 200px; height: 200px; border-radius: 300px;"> </td>
-               <td style="width: 70%;">
-                 <span style="font-size: 1.17em; font-weight: bold;" id="name">John Doe</span>
+           <div id="info">
+             <div class="imageWrapper">
+               <input id="profileUpload" onchange="uploadProfilePic()" type="file" accept="image/*">
+               <img id="profilePic" src="/wireframes-vanilla/images/profile_placeholder.png" alt="profile" >
+               <span class="imageText">Edit Picture</span>
+             </div>
+             <div>
+               <div style="display: flex; flex-wrap: nowrap;">
+                 <span style="font-size: 1.5em; font-weight: bold;  padding-left: 2em; padding-right: 1em;" id="name"></span>
                  <i class="fa fa-pencil-square-o" aria-hidden="true" onclick="updateName()"></i> <br />
-         	       <h3 style="display: inline;">Bio</h3>
-                 <i class="fa fa-pencil-square-o" aria-hidden="true" onclick="updateBio()" style="text-align: right;"></i>
-                 <i class="fa fa-trash-o" aria-hidden="true" onclick="deleteBio()" style="text-align: right;"></i>
-                 <textarea id="bioText" type="text"> </textarea>
-               </td>
-             </tr>
-           </table>
+               </div>
+               <div>
+                 <p id="email"></p>
+               </div>
+             </div>
+           </div>
+           <div>
+     	       <span class="bioHeader">Bio</span>
+             <i class="fa fa-pencil-square-o bioHeader" aria-hidden="true" onclick="updateBio()" style="text-align: right;"></i>
+             <i class="fa fa-trash-o bioHeader" aria-hidden="true" onclick="deleteBio()" style="text-align: right;"></i>
+             <textarea id="bioText" type="text"> </textarea>
+           </div>
          </div>
      	 </div>
-       <p>Update profile picture</p>
-       <input id="profileUpload" onchange="uploadProfilePic()" type="file" accept="image/*">
-    </div>
-    <div class="container" >
-      <section class="item">
-        <h3>Account Info</h3>
-  		 	<p id="email"></p>
-        <input id="newEmail" type="text" placeholder="Enter new email address"> <br>
-        <input id="newPassword" type="password" placeholder="Enter new password">
-        <input id="newPassword2" type="password" placeholder="Confirm new password"> <br>
-        <input id="currentPassword" type="password" placeholder="Enter current password"> <br>
-        <button onclick="updateInfo()">Update Info</button>
-  		 </section>
-    </div>
-    <div id="footer" style="width: 100%;height: 75px;background-color: #f5f5f5; position: static; bottom: 0px;">
-       <div class="row">
-         <div style="float: left; padding-left: 5%">
-           <span>
-             AB Inc. <br>
-             Copyright 2017
-           </span>
+       <section class="infoChangeContainer">
+         <div style="display: flex; flex-direction: column;">
+           <span style="font-size: 1.2em; ">Account Info</span>
+           <input id="newEmail" class="infoChange" type="text" placeholder="Enter new email address"> <br>
+           <input id="newPassword" class="infoChange" type="password" placeholder="Enter new password">
+           <input id="newPassword2" class="infoChange" type="password" placeholder="Confirm new password"> <br>
+           <input id="currentPassword" class="infoChange" type="password" placeholder="Enter current password"> <br>
+           <button onclick="updateInfo()">Update Info</button>
          </div>
-         <div style="float: right; padding-right: 5%;">
-           <span>
-            1234 Maret Street, Suite 00<br>
-            San Francisco, CA 94103<br>
-            someemail@email.com<br>
-          </span>
-         </div>
-       </div>
-     </div>
+	     </section>
+    </div>
+    <div id="footer">
+      <div>
+        <span>AB Inc.</span> <br>
+        <span>Copyright 2017</span>
+      </div>
+      <div>
+        <span>1234 Maret Street, Suite 00</span><br>
+        <span>San Francisco, CA 94103</span><br>
+        <span>someemail@email.com</span><br>
+      </div>
+      <div>
+        <div class="footer-icons">
+          <i class="fa fa-facebook-official" aria-hidden="true"></i>
+          <i class="fa fa-twitter-square" aria-hidden="true"></i>
+        </div>
+        <div class="footer-icons">
+          <i class="fa fa-instagram" aria-hidden="true"></i>
+          <i class="fa fa-youtube-square" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

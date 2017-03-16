@@ -1,7 +1,10 @@
 function uploadImage(file, path){
   path.put(file).then(function(snapshot) {
     console.log('Uploaded a blob or file!');
-  }, downloadProfilePic());
+    downloadProfilePic();
+  }).catch(function(error) {
+    alert(error.message);
+  });
 }
 
 function downloadImage(id, path){
@@ -46,7 +49,7 @@ function downloadProfilePic() {
 function updateBio(){
   var uid = firebase.auth().currentUser.uid;
   text = $("#bioText").val();
-  if(text.length < 1) {
+  if(text == null || text.length < 1) {
     alert("Enter a bio first");
     return;
   }
@@ -121,7 +124,7 @@ function validateEmail(email) {
 
 function updateName() {
   var text = prompt("Enter a new name", "ex: John Doe");
-  if(text.length > 0) {
+  if(text == null || text.length > 0) {
     user = firebase.auth().currentUser
     user.updateProfile({
         displayName: text
