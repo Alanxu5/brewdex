@@ -47,8 +47,10 @@ function updateReview() {
       // grab information from the dropdown
       var reviewText = $('#dropdown option:selected').text();
       var reviewID = $("#dropdown option:selected").attr('id');
+      console.log(reviewID);
       var updatedReview = prompt("Would you like to update your review?", reviewText);
       var ref = firebase.database().ref(currLocation + "/").child(reviewID);
+      console.log(ref);
       // update Firebase with new review
       ref.update({
         "review": updatedReview
@@ -90,8 +92,8 @@ function displayReview() {
         var dropTemplate = document.querySelector('#deleteRow'); // obj ref to template
         var clone = dropTemplate.content.cloneNode(true);
         var option = clone.querySelectorAll('option');
-        option[0].id += snapshot.val().uid;
-        option[0].innerHTML =snapshot.val().review;
+        option[0].id += snapshot.key;
+        option[0].innerHTML = snapshot.val().review;
         dropTemplate.parentNode.appendChild(clone);
       });
     }

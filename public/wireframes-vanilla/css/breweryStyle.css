@@ -114,7 +114,6 @@ li a:hover {
 table {
     border-collapse: collapse;
     width: 100%;
-    padding-bottom: 50px;
 }
 
 th, td {
@@ -185,9 +184,9 @@ article {
   font-size: 2em;
 }
 
-td {
+/*th, td {
     max-width: 100px;
     overflow: scroll;
     text-overflow: ellipsis;
     white-space: nowrap;
-}
+}*/
