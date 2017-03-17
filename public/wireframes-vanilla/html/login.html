@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Brewdex - Login</title>
     <link rel="stylesheet" type="text/css" href="../css/loginStyle.css">
     <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
@@ -40,7 +41,9 @@
   <body onload="checkLogin()">
     <div class="container">
       <div id="menu">
-        <img src="../images/logo.png" style="display: flex; margin: auto;" alt="BrewDex"/>
+        <div style="min-width: 100%; height: auto; margin: 0 auto;">
+          <img id="brew-image" src="../images/logo.png" alt="profile" style="max-width: 100%; height: 100%;" >
+        </div>
         <a href="#login" class="tab">Login</a>
         <a href="#register" class="tab">Register</a>
       </div>
