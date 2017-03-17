@@ -6,10 +6,12 @@
     justify-content: center;
     margin-bottom: 10px;
   }
+  
   .bioHeader {
     margin-left: 5px;
     float: left;
   }
+
   .container {
     width: 90%;
     background: white;
