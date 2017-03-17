@@ -29,6 +29,7 @@
   </head>
   <body>
     <nav>
+      <!-- Navagation bar -->
       <ul class="navbar">
         <li class="navbar" id="logo"><a  href="/wireframes-vanilla/html/home.html"><img src="../images/logo_small.png" height="50" width="75" alt="logo"></a>
         <li class="navbar"><a class="navbar" href="/wireframes-vanilla/html/profile.html"><i class="fa fa-user-circle-o " aria-hidden="true"></i> <span class="navText">PROFILE</span></a></li>
@@ -37,7 +38,6 @@
     </nav>
     <br/>
     <div class="container">
-
       <div>
      	 <address>
          Ballast Point <br/>
@@ -51,10 +51,10 @@
       </div>
       <br/>
       <br/>
+      <!-- Reviews -->
       <div id="ReviewArea">
         <form id="textForm">
           <p> Leave a review: </p>
-          <!-- <input type="text" id="review"> -->
           <textarea id="review" rows="5" cols="25"></textarea>
         </form>
         <button id="btn" onclick="writeReview()">Submit</button>
@@ -79,7 +79,6 @@
             </tr>
           </thead>
           <tbody>
-            <!-- existing data could optionally be included here -->
           </tbody>
         </table>
         <template id="reviewRow">
@@ -89,7 +88,7 @@
           </tr>
         </template>
       </div>
-      <!--Reviews-->
+      <!-- Footer -->
     </div>
     <div id="footer">
       <div>
@@ -112,28 +111,26 @@
         </div>
       </div>
     </div>
-     <script>
-       document.getElementById("btn").addEventListener("click", displayReview);
-     </script>
      <script type ="text/javascript">
+       // when the submit button is clicked call displayReview()
+       document.getElementById("btn").addEventListener("click", displayReview);
+       // runs when the page refreshes
        window.addEventListener("load", function() {
            firebase.auth().onAuthStateChanged(function(user) {
              if(user){
+               // user info
                var usr = user;
                var userUid = user.uid;
                var displayName = user.displayName;
+               // grab location for firebase
                url = window.location.href;
-               console.log(url);
                currentLocation = url.split('/').pop();
-               console.log(currentLocation);
                currLocation = currentLocation.split('.')[0];
-               console.log(currLocation);
-               console.log("Beginning of onload()");
-               console.log("userUid:" + userUid);
-               console.log(displayName);
+               // templating the review table
                var t = document.querySelector('#reviewRow'),
                td = t.content.querySelectorAll("td");
                var ref = firebase.database().ref(currLocation);
+               // grab the information from Firebase
                ref.once('value', function(snapshot) {
                  var reviewArr = [];
                  var userArr = [];
@@ -141,11 +138,11 @@
                  for (var key in data) {
                    if (data.hasOwnProperty(key)) {
                      reviewArr.push(data[key].review);
-                     userArr.push(displayName); //data[key].uid
+                     userArr.push(displayName);
                    };
                  }
-                 console.log("ReviewArr after grabbing data from firebase - onload()" + reviewArr);
                  var i;
+                 // create the table
                  for(i = 0; i < reviewArr.length; i++){
                    td[0].textContent = userArr[i];
                    td[1].textContent = reviewArr[i];
@@ -153,20 +150,16 @@
                    var clone = document.importNode(t.content, true);
                    tb.appendChild(clone);
                  }
-                 console.log("Finished outputting stuff for reviews - onload()");
 
-                 // <!--Delete/Update Reviews-->
-                 console.log("Dropdown - onload()");
+                 // Deleting and updating reviews
                  url = window.location.href;
-                 console.log(url);
                  currentLocation = url.split('/').pop();
-                 console.log(currentLocation);
                  currLocation = currentLocation.split('.')[0];
-                 console.log(currLocation);
-                 var dropTemplate = document.querySelector('#deleteRow'); // obj ref to template
+                 // template the dropdown
+                 var dropTemplate = document.querySelector('#deleteRow');
                  var ref = firebase.database().ref(currLocation);
+                 // grab information from Firebase
                  ref.once('value', function(snapshot) {
-                   console.log("Inside of ref.once dropdown");
                    var dropDownArr = [];
                    var reviewIDArr = [];
                    var data = snapshot.val();
@@ -176,7 +169,7 @@
                        reviewIDArr.push(key);
                      };
                    }
-                   console.log("ReviewArr after grabbing data from firebase - DDonload()" + dropDownArr);
+                   // create the dropdown
                    for(i = 0; i < dropDownArr.length; i++){
                      var clone = dropTemplate.content.cloneNode(true);
                      var option = clone.querySelectorAll('option');
@@ -184,7 +177,6 @@
                      option[0].innerHTML = dropDownArr[i];
                      dropTemplate.parentNode.appendChild(clone);
                    }
-                   console.log("Finished outputting stuff for dropdown - DDonload()");
                  });
                });
              } else {
