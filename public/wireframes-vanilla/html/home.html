@@ -56,11 +56,6 @@
         });
       };
       window.addEventListener('load', function() {
-        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-           $(".navText").each(function() {
-            this.innerHTML= "";
-           });
-        }
         initApp()
       });
     </script>
@@ -68,8 +63,8 @@
       <ul class="navbar">
         <li class="navbar" id="logo"><a  href="/wireframes-vanilla/html/home.html"><img src="../images/logo_small.png" height="50" width="75" alt="logo"></a>
         <li class="navbar"><a class="navbar" href="/wireframes-vanilla/html/profile.html"><i class="fa fa-user-circle-o " aria-hidden="true"></i> <span class="navText">PROFILE</span></a></li>
-        <li class="navbar"><a class="navbar" href="/wireframes-vanilla/html/buddies.html"><i class="fa fa-users " aria-hidden="true"></i> <span class="navText">BEER BUDDIES</span></a></li>
-        <li class="navbar"><a class="navbar" href="/wireframes-vanilla/html/notifications.html"><i class="fa fa-bell " aria-hidden="true"></i><span class="navText">NOTIFICATIONS</span></a></li>
+
+
         <li class="logout"><a class="navbar" href="/wireframes-vanilla/html/login.html"><i class="fa fa-sign-out " aria-hidden="true"></i><span class="navText">LOGOUT</span></a></li>
       </ul>
     </nav>
