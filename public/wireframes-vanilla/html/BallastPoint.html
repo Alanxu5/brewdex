@@ -21,6 +21,13 @@
       };
       firebase.initializeApp(config);
       var database = firebase.database();
+            window.addEventListener('load', function() {
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+           $(".navText").each(function() {
+            this.innerHTML= "";
+           });
+        }
+      });
     </script>
     <link rel="stylesheet" type="text/css" href="../css/breweryStyle.css">
     <script src="../js/review.js"></script>
@@ -35,17 +42,21 @@
         <li class="logout"><a class="navbar" href="/wireframes-vanilla/html/login.html"><i class="fa fa-sign-out " aria-hidden="true"></i><span class="navText">LOGOUT</span></a></li>
       </ul>
     </nav>
-    <article class="container">
-      <header>
+    <br/>
+    <div class="container">
+
+      <div>
      	 <address>
          Ballast Point <br/>
          9045 Carroll Way <br/>
          San Diego, CA 92121 <br/>
          (858) 790-6900 <br/>
        </address>
-      </header>
+      </div>
+      <div style="max-width: 325px; height: auto;">
+        <img id="brew-image" src="/wireframes-vanilla/images/Brewery.jpg" alt="profile" style="width: 100%; height: 100%;" >
+      </div>
       <br/>
-      <img src="/wireframes-vanilla/images/Brewery.jpg" alt="profile" height="300" width="425">
       <br/>
       <div id="ReviewArea">
         <form id="textForm">
@@ -86,7 +97,7 @@
         </template>
       </div>
       <!--Reviews-->
-    </article>
+    </div>
     <div id="footer">
       <div>
         <span>AB Inc.</span> <br>
