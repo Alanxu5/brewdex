@@ -1,4 +1,4 @@
-# Project Title
+# BrewDex
 
 BrewDex is a web application that allows users to keep track and find breweries in San Diego.
 
@@ -72,4 +72,4 @@ for a live link.
 
 ## Acknowledgments
 
-* Thank you Professor Powell and the TAs for an awesome quarter! 
+* Thank you Professor Powell and the TAs for an awesome quarter!
