@@ -1,5 +1,9 @@
 /* smartphones, iPhone, portrait 480x320 phones */
 @media (max-width:800px)  {
+  /*#brew-image {
+    width:
+  }*/
+
   #info {
     display: flex;
     flex-wrap: wrap;
