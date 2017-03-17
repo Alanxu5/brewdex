@@ -1,3 +1,4 @@
+// uploads an image given a file and a path
 function uploadImage(file, path){
   path.put(file).then(function(snapshot) {
     console.log('Uploaded a blob or file!');
@@ -7,6 +8,7 @@ function uploadImage(file, path){
   });
 }
 
+// Inserts an image from firebase
 function downloadImage(id, path){
   path.getDownloadURL().then(function(url) {
     // `url` is the download URL for 'images/stars.jpg'
@@ -22,6 +24,7 @@ function downloadImage(id, path){
 }
 
 
+// uploads an image from firebase
 function uploadProfilePic() {
   // Get a reference to the storage service, which is used to create references in your storage bucket
   var storage = firebase.storage();
@@ -35,6 +38,7 @@ function uploadProfilePic() {
   uploadImage(file, userRef);
 }
 
+// downloads an image from firebase
 function downloadProfilePic() {
   // Get a reference to the storage service, which is used to create references in your storage bucket
   var storage = firebase.storage();
@@ -60,7 +64,7 @@ function updateBio(){
 }
 
 
-
+// Gets user bio from firebase
 function readBio() {
   var uid = firebase.auth().currentUser.uid;
   var userRef = firebase.database().ref('/userBio/').child(uid);
@@ -73,6 +77,7 @@ function readBio() {
   });
 }
 
+// Deletes bio from fire base and current DOM
 function deleteBio() {
   var uid = firebase.auth().currentUser.uid;
   var userRef = firebase.database().ref('/userBio/').child(uid);
@@ -87,11 +92,13 @@ function deleteBio() {
   });
 }
 
+// Displays a bio onto the DOM
 function displayBio(text) {
   console.log(text);
   $("#bioText").val(text);
 }
 
+// Gets the current user's credentials
 function getCredentials(password) {
   const user = firebase.auth().currentUser;
   return credential = firebase.auth.EmailAuthProvider.credential(
@@ -100,6 +107,7 @@ function getCredentials(password) {
   );
 }
 
+// Validates two passwords
 function validatePassword(password, password2) {
   if(password.length < 5) {
     $("#registerPassword").animate({border: '2px red'}, "fast");
@@ -112,6 +120,7 @@ function validatePassword(password, password2) {
   return "";
 }
 
+// Validates an email
 function validateEmail(email) {
   var re = /\S+@\S+/
   //re.test(email)
@@ -122,6 +131,7 @@ function validateEmail(email) {
   }
 }
 
+// Updates a name to firebase
 function updateName() {
   var text = prompt("Enter a new name", "ex: John Doe");
   if(text == null || text.length > 0) {
@@ -142,12 +152,15 @@ function updateName() {
   }
 }
 
+// Updates email and/or password to firebase
 function updateInfo() {
+  // Get the input from user
   const password = $("#newPassword").val();
   const password2 = $("#newPassword2").val();
   const email = $("#newEmail").val();
   const currentPassword = $("#currentPassword").val();
 
+  // validate input
   var error = validatePassword(currentPassword, currentPassword);
   if(error != "") {
     alert(error);
@@ -156,21 +169,26 @@ function updateInfo() {
 
   const credential = getCredentials(currentPassword);
 
+  // check if user entered input
   if(password.length > 0) {
     error = validatePassword(password, password2);
   }
   if(email.length > 0) {
     error += validateEmail(email);
   }
+  // return if any errors so far
   if(error != "") {
       alert(error);
       return;
   }
 
+  // reauth to firebase to update info
   firebase.auth().currentUser.reauthenticate(credential)
     .then(function() { console.log(password);
+      // update password user entered one
       if(password.length > 0) {
         firebase.auth().currentUser.updatePassword(password).then(function() {
+          // re-signin
           firebase.auth().signInWithEmailAndPassword(firebase.auth().currentUser.email, password).catch(function(error) {
             console.log(error);
             alert(error);
@@ -182,6 +200,7 @@ function updateInfo() {
         });
       }
     }).then(function() {
+      // updat email if user entered one
       if(email.length > 0) {
         firebase.auth().currentUser.updateEmail(email);
         alert("Changed Email!");

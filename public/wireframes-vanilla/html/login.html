@@ -38,16 +38,22 @@
       </script>
     <script src="../js/authentication.js"></script>
   </head>
+  <!-- Check if user is logged in, they are redirect to home -->
   <body onload="checkLogin()">
+    <!-- Main content -->
     <div class="container">
+      <!-- Two tabs, one for register and one for login -->
       <div id="menu">
+        <!-- Logo  -->
         <div style="min-width: 100%; height: auto; margin: 0 auto;">
           <img id="brew-image" src="../images/logo.png" alt="profile" style="max-width: 100%; height: 100%;" >
         </div>
         <a href="#login" class="tab">Login</a>
         <a href="#register" class="tab">Register</a>
       </div>
+      <!-- Contains the two tabs-->
       <div class="tab-container">
+        <!-- Contains ui for registering-->
         <div id="register" class="tab-content">
           <h2>Register</h2>
             <h3>Email</h3>
@@ -62,6 +68,7 @@
             <input id="registerLastName" type="text">
             <button onclick="registerWithEmail()" class="firebaseui-idp-button mdl-button mdl-js-button mdl-button--raised firebaseui-idp-password firebaseui-id-idp-button "><img class="firebaseui-idp-icon" src="https://www.gstatic.com/firebasejs/ui/0.5.0/images/auth/mail.svg"><span class="firebaseui-idp-text firebaseui-idp-text-long">Register with email</span><span class="firebaseui-idp-text firebaseui-idp-text-short">Email</span></button>
         </div>
+        <!-- Contains ui for logging in-->
         <div id="login" class="tab-content">
           <h2>Login</h2>
           <h3>Email</h3>
@@ -73,6 +80,5 @@
         </div>
       </div>
     </div>
-
   </body>
 </html>
