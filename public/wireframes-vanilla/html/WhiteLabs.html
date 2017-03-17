@@ -137,7 +137,7 @@
                 for (var key in data) {
                   if (data.hasOwnProperty(key)) {
                     reviewArr.push(data[key].review);
-                    userArr.push(displayName);
+                    userArr.push(data[key].uid);
                   };
                 }
                 var i;
