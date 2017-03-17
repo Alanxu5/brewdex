@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="../css/profileStyle.css">
     <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
     <script>
-      // Initialize Firebase
+      // Config for firebase
       var config = {
         apiKey: "AIzaSyCck0J0h1VN7P5YTGz9CS2BKRJd-z33P8M",
         authDomain: "b-hw3-3793a.firebaseapp.com",
@@ -15,7 +15,9 @@
         storageBucket: "b-hw3-3793a.appspot.com",
         messagingSenderId: "541447121792"
       };
+      // Initialize Firebase
       firebase.initializeApp(config);
+        // Checks if user is logged in, if they are then get data, else login page
         initApp = function() {
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
@@ -32,6 +34,7 @@
           console.log(error);
         });
       };
+      // Loads everything on start
       window.addEventListener('load', function() {
         initApp();
       });
@@ -42,36 +45,41 @@
     <script src="../js/profile.js"></script>
   </head>
   <body>
+    <!-- Navigation Bar  -->
     <nav>
       <ul class="navbar">
         <li class="navbar" id="logo"><a  href="/wireframes-vanilla/html/home.html"><img src="../images/logo_small.png" height="50" width="75" alt="logo"></a>
         <li class="navbar"><a class="navbar" href="/wireframes-vanilla/html/profile.html"><i class="fa fa-user-circle-o " aria-hidden="true"></i> <span class="navText">PROFILE</span></a></li>
-
-
         <li class="logout"><a class="navbar" href="/wireframes-vanilla/html/login.html"><i class="fa fa-sign-out " aria-hidden="true"></i><span class="navText">LOGOUT</span></a></li>
       </ul>
     </nav>
     <br/>
+    <!-- Main content -->
   	<div class="container" style="margin-bottom: 5px;">
+      <!-- General Info: profile pic, name, email-->
      	 <div class="item">
          <div style="text-align: center;">
        	   <h1>Profile</h1>
            <div id="info">
+             <!-- Profile pic with click to upload -->
              <div class="imageWrapper">
                <input id="profileUpload" onchange="uploadProfilePic()" type="file" accept="image/*">
                <img id="profilePic" src="/wireframes-vanilla/images/profile_placeholder.png" alt="profile" >
                <span class="imageText">Edit Picture</span>
              </div>
+             <!-- Name and edit name -->
              <div>
                <div style="display: flex; flex-wrap: nowrap;">
                  <span style="font-size: 1.5em; font-weight: bold;  padding-left: 2em; padding-right: 1em;" id="name"></span>
                  <i class="fa fa-pencil-square-o" aria-hidden="true" onclick="updateName()"></i> <br />
                </div>
+               <!-- Email -->
                <div>
                  <p id="email"></p>
                </div>
              </div>
            </div>
+           <!-- Bio text and edit/update text -->
            <div>
      	       <span class="bioHeader">Bio</span>
              <i class="fa fa-pencil-square-o bioHeader" aria-hidden="true" onclick="updateBio()" style="text-align: right;"></i>
@@ -80,8 +88,10 @@
            </div>
          </div>
      	 </div>
+       <!-- Interface to update user info -->
        <section class="infoChangeContainer">
          <div style="display: flex; flex-direction: column;">
+           <!--Update email, or password -->
            <span style="font-size: 1.2em; ">Account Info</span>
            <input id="newEmail" class="infoChange" type="text" placeholder="Enter new email address"> <br>
            <input id="newPassword" class="infoChange" type="password" placeholder="Enter new password">
@@ -91,6 +101,7 @@
          </div>
 	     </section>
     </div>
+    <!-- Footer section -->
     <div id="footer">
       <div>
         <span>AB Inc.</span> <br>

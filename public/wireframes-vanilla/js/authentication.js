@@ -1,8 +1,7 @@
-var locked = false;
 
 function checkLogin() {
   firebase.auth().onAuthStateChanged(function(user) {
-    if (user & locked == false) {
+    if (user) {
       window.location = "/wireframes-vanilla/html/home.html";
     }
   });
@@ -12,31 +11,18 @@ function checkLogin() {
 function registerWithEmail() {
   var email = $("#registerEmail").val();
   var password = $("#registerPassword").val();
-  var password2 = $("#registerPassword2").val();
-  var firstname = $("#registerFirstName").val();
-  var lastname = $("#registerLastName").val();
+  var password2= $("#registerPassword2").val();
 
-  if(!validateRegistrationFields(password, password2, email, firstname, lastname)) {
+  if(!validateRegistrationFields(password, password2, email)) {
     return;
   }
 
   console.log(password + password2 + email)
   var success = true;
-  locked = true;
   firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
-    user.updateProfile({
-        displayName: firstname + " " + lastname
-    }).then(function() {
-        locked = false
-        window.location = "/wireframes-vanilla/html/home.html";
-        console.log(user.displayName);
-        // Update successful.
-    }, function(error) {
-        // An error happened.
-    });
+    window.location = "/wireframes-vanilla/html/home.html";
   }, function(error) {
     // Handle Errors here.
-
     var errorCode = error.code;
     var errorMessage = error.message;
 
@@ -49,25 +35,16 @@ function registerWithEmail() {
 }
 
 /* VALIDATION */
-function validateRegistrationFields(password, password2, email, first, last) {
+function validateRegistrationFields(password, password2, email) {
   var errors = ""
   errors += validatePassword(password, password2);
   errors += validateEmail(password, password2);
-  errors += validateName(first, last);
 
   if(errors != "") {
     alert(errors);
     return false;
   }
   return true;
-}
-
-function validateName(first, last) {
-  if(first < 1 || last < 1) {
-    return "Password must be greater than 5 characters\n";
-  }
-  return "";
-
 }
 
 function validatePassword(password, password2) {
@@ -81,7 +58,6 @@ function validatePassword(password, password2) {
   }
   return "";
 }
-
 function validateEmail(email) {
   var re = /\S+@\S+/
   //re.test(email)
