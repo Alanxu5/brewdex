@@ -3,16 +3,19 @@ function writeReview() {
     if(user){
       var uid = user.uid; // need the specific user to display their reviews
       var displayName = user.displayName;
+      url = window.location.href;
+      console.log(url);
+      currentLocation = url.split('/').pop();
+      console.log(currentLocation);
+      currLocation = currentLocation.split('.')[0];
+      console.log(currLocation);
       console.log("Beginning of writeReview()");
       var review = $("#review").val();
-      url = window.location.href;
-      currentLocation = url.split('/').pop();
-      currLocation = currentLocation.split('.')[0];
       var location;
       var reviewData = {
         uid: uid,
         review: review,
-        location: currentLocation
+        location: currLocation
       };
       var newReviewKey = firebase.database().ref("reviews/").child('reviews').push().key;
       var updates = {};
@@ -38,12 +41,18 @@ function updateReview() {
     if(user){
       var uid = user.uid; // need the specific user to display their reviews
       var displayName = user.displayName;
+      url = window.location.href;
+      console.log(url);
+      currentLocation = url.split('/').pop();
+      console.log(currentLocation);
+      currLocation = currentLocation.split('.')[0];
+      console.log(currLocation);
       console.log("Beginning of updateReview()");
       var reviewText = $('#dropdown option:selected').text();
       var reviewID = $("#dropdown option:selected").attr('id');
       var updatedReview = prompt("Would you like to update your review?", reviewText);
       console.log("Value of the review text - updatedReview()" + updatedReview);
-      var ref = firebase.database().ref("BallastPoint/").child(reviewID);
+      var ref = firebase.database().ref(currLocation + "/").child(reviewID);
       ref.update({
         "review": updatedReview
       });
@@ -63,8 +72,14 @@ function displayReview() {
   firebase.auth().onAuthStateChanged(function(user) {
     if(user){
       var displayName = user.displayName;
+      url = window.location.href;
+      console.log(url);
+      currentLocation = url.split('/').pop();
+      console.log(currentLocation);
+      currLocation = currentLocation.split('.')[0];
+      console.log(currLocation);
       console.log("Beginning of displayReview()");
-      var reviewRef = firebase.database().ref("BallastPoint");
+      var reviewRef = firebase.database().ref(currLocation);
       reviewRef.limitToLast(1).once('child_added', function(snapshot) {
         console.log(snapshot.val().review);
         var t = document.querySelector('#reviewRow'),
@@ -111,9 +126,15 @@ function deleteReview() {
     if(user){
       var uid = user.uid; // need the specific user to display their reviews
       var displayName = user.displayName;
+      url = window.location.href;
+      console.log(url);
+      currentLocation = url.split('/').pop();
+      console.log(currentLocation);
+      currLocation = currentLocation.split('.')[0];
+      console.log(currLocation);
       console.log("Beginning of deleteReview()");
       var reviewID = $("#dropdown option:selected").attr('id');
-      var ref = firebase.database().ref("BallastPoint/").child(reviewID);
+      var ref = firebase.database().ref(currLocation + "/").child(reviewID);
       var ref1 =  firebase.database().ref("user-reviews/").child(uid).child(reviewID);
       ref.remove();
       ref1.remove();
